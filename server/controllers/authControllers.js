@@ -13,7 +13,7 @@ import jwt from 'jsonwebtoken';
     const { fullName, email, password, profileImageUrl } = req.body;
 
     // validation Check for missing fields 
-     if(!fullName || !email || !password || !profileImageUrl){
+     if(!fullName || !email || !password ){
         return res.status(400).json({ message: 'All fields are required' });
      }
 
