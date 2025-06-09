@@ -21,6 +21,8 @@ app.use(express.json());
 
 app.use('/api/v1/auth',authRoutes);
 
+
+
 app.get('/api', (req, res) => {
   res.json({ message: 'Hello from the server!' });
 });
