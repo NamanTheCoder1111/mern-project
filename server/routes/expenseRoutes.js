@@ -1,12 +1,12 @@
-import express from "express";
-import {addExpense,getAllExpense,deleteExpense,downloadExpenseExcel} from '../controllers/expenseControllers.js';
-import { protect } from '../middleware/authMiddleware.js';
+// import express from "express";
+// import {addExpense,getAllExpense,deleteExpense,downloadExpenseExcel} from '../controllers/expenseControllers.js';
+// import { protect } from '../middleware/authMiddleware.js';
 
-const router = express.Router();
+// const router = express.Router();
 
-router.post("/add",protect,addExpense);
-router.get("/get",protect,getAllExpense);
-router.get("/downloadexcel",protect,downloadExpenseExcel);
-router.delete("/:id",protect,deleteExpense);
+// router.post("/add",protect,addExpense);
+// router.get("/get",protect,getAllExpense);
+// router.get("/downloadexcel",protect,downloadExpenseExcel);
+// router.delete("/:id",protect,deleteExpense);
 
-export default router;
+// export default router;
