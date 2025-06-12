@@ -14,14 +14,15 @@ function SignUp() {
 
 
   const handleSubmit = () =>{
+    handlesignup();
     e.preventDefault();
     setError('');
     setSignUp(true);
   }
 
 
-  useEffect(()=>{   
-    const signup = async ()=>{
+  
+    const handlesignup = async ()=>{
       try{
       const response = await fetch('/api/v1/auth/register',{
         method : "POST",
@@ -32,6 +33,7 @@ function SignUp() {
         const { message } = await res.json();
           throw new Error(message || 'SignUp failed');
        }
+       navigate('/login')
     } catch (err) {
       setError(err.message);
     } finally {
@@ -41,10 +43,7 @@ function SignUp() {
         setPassword('')
         setImage('')
     }
-    signup()
   }
-
-  },[signup,name,email,password,image])
 
   return (
     <div className='bg-white p-10 h-[100vh] absolute w-[100vw] '>

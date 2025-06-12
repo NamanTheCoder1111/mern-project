@@ -34,6 +34,7 @@ function Login() {
           const { message } = await res.json();
           throw new Error(message || 'Login failed');
         }
+         navigate('/dashboard')
       } catch (err) {
         setError(err.message);
       }
