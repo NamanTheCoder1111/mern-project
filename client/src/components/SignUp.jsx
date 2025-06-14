@@ -7,42 +7,93 @@ function SignUp() {
   const [name , setName] = useState()
   const [email ,setEmail] = useState();
   const [password , setPassword ] =useState();
-  const [signup ,setSignUp] = useState(false);
+  // const [signup ,setSignUp] = useState(false);
   const [image ,setImage] = useState();
   const [error,setError] = useState()
   const navigate = useNavigate();
 
-
-  const handleSubmit = () =>{
-    handlesignup();
-    e.preventDefault();
-    setError('');
-    setSignUp(true);
-  }
-
-
   
-    const handlesignup = async ()=>{
-      try{
-      const response = await fetch('/api/v1/auth/register',{
+  //   const handleSubmit = async (e)=>{
+  //     e.preventDefault();
+  //    image = handleUploadImage();
+  //     try{
+  //     const response = await fetch('/api/v1/auth/register',{
+  //       method : "POST",
+  //       headers : {'Content-Type' :  'application/json'},
+  //       body: JSON.stringify({ fullName:name,email, password ,profileImageUrl:image.imageUrl }),
+  //     })
+  //      if(!response.ok){
+  //       const { message } = await response.json();
+  //         throw new Error(message || 'SignUp failed');
+  //      }
+  //       navigate('/')
+  //       setName('')
+  //       setEmail('')
+  //       setPassword('')
+  //       setImage('')
+  //   } catch (err) {
+  //     setError(err.message);
+  //   } 
+  // }
+
+
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    // Upload the image first
+    const uploadedImageUrl =  handleUploadImage();
+    console.log(uploadedImageUrl)
+    if (!uploadedImageUrl) {
+      throw new Error('Image upload failed');
+    }
+
+    // Proceed with the signup API call
+    const response = await fetch('/api/v1/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fullName: name,
+        email,
+        password,
+        profileImageUrl: uploadedImageUrl,
+      }),
+    });
+
+    if (!response.ok) {
+      const { message } = await response.json();
+      throw new Error(message || 'SignUp failed');
+    }
+
+    // Reset form fields and navigate
+    setName('');
+    setEmail('');
+    setPassword('');
+    setImage('');
+    navigate('/');
+  } catch (err) {
+    setError(err.message);
+  }
+};
+
+
+  const handleUploadImage = async()=>{
+    const formData = new FormData();
+    formData.append('image',image)
+     try{
+      const response = await fetch('/api/v1/auth/upload-image' , {
         method : "POST",
-        headers : {'Content-Type' :  'application/json'},
-        body: JSON.stringify({ fullName,email, password ,profileImageUrl }),
+        body : formData
       })
-       if(!response.ok){
-        const { message } = await res.json();
+      if(!response.ok){
+        const { message } = await response.json();
           throw new Error(message || 'SignUp failed');
        }
-       navigate('/login')
-    } catch (err) {
+     }
+     catch(err) {
       setError(err.message);
-    } finally {
-        setSignUp(false)
-        setName('')
-        setEmail('')
-        setPassword('')
-        setImage('')
-    }
+     }
   }
 
   return (
