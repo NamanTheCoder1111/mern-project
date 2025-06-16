@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import authRoutes from './routes/authRoutes.js'
 import incomeRoutes from './routes/incomeRoutes.js'
-// import expenseRoutes from './routes/expenseRoutes.js'
+import expenseRoutes from './routes/expenseRoutes.js'
 
 dotenv.config();
 
@@ -28,7 +28,7 @@ app.use(express.json());
 
 app.use('/api/v1/auth',authRoutes);
 app.use('/api/v1/income',incomeRoutes);
-// app.use('/api/v1/expense',expenseRoutes);
+app.use('/api/v1/expense',expenseRoutes);
 
 //serves uploads file 
 app.use("uploads",express.static(path.join(__dirname,"uploads")));
