@@ -42,7 +42,7 @@ function Sidebar({ data }) {
 
 
     <div className='w-[324px] bg-[#F8F7F1] h-[100vh] p-5'>
-      <img src={user?.profileImageUrl} alt="Profile" className='h-[20px] w-[20px]' />
+      <img src={user?.profileImageUrl} alt="Profile" className='h-16 w-16 object-cover rounded-full' />
       <div className='my-6'>
         <p className='text-xl text-[#525256]'>Welcome back,</p>
         <p className='text-xl font-bold'> {user?.fullName}!</p>
