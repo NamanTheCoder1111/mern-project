@@ -1,24 +1,25 @@
-import React from "react";
 import { GoPlus } from "react-icons/go";
+import BarGraph from "../../Graph/BarGraph";
 
-function IncomeOverView() {
+function IncomeOverView({ chartData }) {
+
   return (
-    <div className="bg-white h-[50%] m-4 rounded-sm p-3">
+    <div className=" 'w-full h-[50%] shadow-lg mt-6 p-5' bg-white h-[50%] m-4 rounded-sm p-3">
       <div className="flex justify-between">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-xl font-semibold ">Income Overview</h1>
-          <p className="text-sm text-gray-400 font-bold">
-            Track your earnings over time and analyse your income trends.
-          </p>
+        <div >
+          <p className='text-md  font-bold pb-2'>Income OverView</p>
+          <p className='text-sm text-[#525256] font-semibold pb-2'>Track your earnings over time and analyze your income trends</p>
         </div>
         <span>
-          <button className="text-sm bg-purple-200 px-3 py-1 flex items-center gap-1 font-semibold text-purple-600 rounded-sm border-gray-100">
+          <button className="text-sm bg-gray-200 px-3 py-1 flex items-center gap-1 font-semibold text-gray-600 rounded-sm border-gray-100">
             <GoPlus />
             Add Income
           </button>
         </span>
       </div>
+      <BarGraph data={chartData} />
     </div>
+
   );
 }
 

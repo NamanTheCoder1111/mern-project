@@ -1,25 +1,26 @@
 import React from 'react'
 import { GoPlus } from "react-icons/go";
+import AreaGraph from '../../Graph/AreaGraph';
 
 
-function ExpensesOverview() {
+function ExpensesOverview({data}) {
   return (
-    <div className="bg-white h-[50%] m-4 rounded-sm p-3">
-          <div className="flex justify-between">
-            <div className="flex flex-col gap-1">
-              <h1 className="text-xl font-semibold ">Expense Overview</h1>
-              <p className="text-sm text-gray-400 font-bold">
-                Track your spending trends over time and gain insights into where your money goes.
-              </p>
-            </div>
-            <span>
-              <button className="text-sm bg-purple-200 px-3 py-1 flex items-center gap-1 font-semibold text-purple-600 rounded-sm border-gray-100">
-                <GoPlus />
-                Add Expense
-              </button>
-            </span>
-          </div>
+
+    <div className=" 'w-full h-[50%] shadow-lg mt-6 p-5' bg-white h-[50%] m-4 rounded-sm p-3">
+      <div className="flex justify-between">
+        <div >
+          <p className='text-md  font-bold pb-2'>Expense OverView</p>
+          <p className='text-sm text-[#525256] font-semibold pb-2'>Track your spending trends over time and gain insights into where your money goes.</p>
         </div>
+        <span>
+          <button className="text-sm bg-gray-200 px-3 py-1 flex items-center gap-1 font-semibold text-gray-600 rounded-sm border-gray-100">
+            <GoPlus />
+            Add Expense
+          </button>
+        </span>
+      </div>
+      <AreaGraph data={data}/>
+    </div>
   )
 }
 
