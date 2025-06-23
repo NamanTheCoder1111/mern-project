@@ -29,7 +29,6 @@ function IncomeSource({ data }) {
         <h1 className="text-xl font-semibold ">Income Sources</h1>
         <span>
           <button className="text-sm bg-gray-200 px-3 py-1 flex items-center gap-1 font-semibold text-gray-600 rounded-sm border-gray-100"
-            onClick={DowloadIncome}
           >
             <GoDownload />
             Download

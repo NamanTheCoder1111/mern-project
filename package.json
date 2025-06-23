@@ -17,6 +17,7 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "@mui/material": "^7.1.1"
+    "@mui/material": "^7.1.1",
+    "react-datepicker": "^8.4.0"
   }
 }
