@@ -13,7 +13,7 @@ const PhotoUpload = ({ image, setImage }) => {
   };
 
   return (
-    <div className="relative w-24 h-24 rounded-full border-1 border-purple-500 shadow-md">
+    <div className="relative w-24 h-24 rounded-full border-1 border-gray-500 shadow-md">
       {preview ? (
         <img
           src={preview}
@@ -22,7 +22,7 @@ const PhotoUpload = ({ image, setImage }) => {
         />
       ) : (
         <div className="w-full h-full rounded-full flex items-center justify-center">
-          <FaUser className="text-purple-500 text-3xl" />
+          <FaUser className="text-gray-500 text-3xl" />
         </div>
       )}
       <input
@@ -31,7 +31,7 @@ const PhotoUpload = ({ image, setImage }) => {
         onChange={handleImageChange}
       />
       <div className="absolute bottom-0 right-0 bg-white rounded-full p-1 shadow">
-        <FaCamera className="text-purple-500 text-sm" />
+        <FaCamera className="text-gray-500 text-sm" />
       </div>
     </div>
   );

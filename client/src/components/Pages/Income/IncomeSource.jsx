@@ -6,29 +6,43 @@ import formatDate from "../../../format/formatDate";
 
 function IncomeSource({ data }) {
 
-  // const DowloadIncome = () => {
-  //   const token = localStorage.getItem('token');
-  //   fetch('/api/v1/income/downloadexcel', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching user:', error);
-  //     });
-  // }
+  const downloadIncome = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('/api/v1/income/downloadexcel', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Download failed');
+      }
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'income_details.xlsx';
+      document.body.appendChild(a);
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Error downloading income data:', error);
+    }
+  };
 
   return (
     <div className="bg-white h-[40%] m-4 rounded-sm p-4 overflow-scroll">
       <div className="flex justify-between">
         <h1 className="text-xl font-semibold ">Income Sources</h1>
         <span>
-          <button className="text-sm bg-gray-200 px-3 py-1 flex items-center gap-1 font-semibold text-gray-600 rounded-sm border-gray-100"
+          <button
+            className="text-sm bg-gray-200 px-3 py-1 flex items-center gap-1 font-semibold text-gray-600 rounded-sm border-gray-100 hover:bg-gray-300 transition-colors"
+            onClick={downloadIncome}
           >
             <GoDownload />
             Download

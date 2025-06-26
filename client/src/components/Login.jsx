@@ -7,7 +7,7 @@ function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   }
@@ -17,30 +17,30 @@ function Login() {
   }
 
   const handleSubmit = async (e) => {
-  e.preventDefault(); 
-  try {
-    const response = await fetch('/api/v1/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/v1/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (!response.ok) {
-      const { message } = await response.json();
-      throw new Error(message || 'Login failed');
+      if (!response.ok) {
+        const { message } = await response.json();
+        throw new Error(message || 'Login failed');
+      }
+
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
+
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setEmail('');
+      setPassword('');
     }
-
-    const data = await response.json();
-    localStorage.setItem('token', data.token); 
-
-    navigate('/dashboard');
-  } catch (err) {
-    setError(err.message);
-  } finally {
-    setEmail('');
-    setPassword('');
-  }
-};
+  };
 
 
   return (
@@ -74,7 +74,7 @@ function Login() {
 
           <button
             type='submit'
-            className='text-xl bg-purple-400 text-white cursor-pointer font-bold rounded p-2 w-[70%] mt-3.5'>
+            className='text-xl bg-gray-400 text-white cursor-pointer font-bold rounded p-2 w-[70%] mt-3.5'>
             Login
           </button>
 
@@ -84,7 +84,7 @@ function Login() {
         <p className='text-sm font-bold pt-5'>
           Don't have an account?{' '}
           <span
-            className='text-purple-500 underline cursor-pointer'
+            className='text-black-500 underline cursor-pointer'
             onClick={() => navigate('/signup')}>
             Sign Up
           </span>

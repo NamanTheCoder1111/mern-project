@@ -9,11 +9,30 @@ import RecentTransactions from '../RecentTransactions';
 import FinOverView from '../FinOverView'
 
 
-function Dashboard({data}) {
+function Dashboard() {
+
+  const [data, setData] = useState([])
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    fetch('/api/v1/dashboard', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => res.json())
+      .then((res) => (
+        setData(res)
+      ))
+      .catch((err) => {
+        console.log('Error fetching Error :', err)
+      })
+  }, [])
 
   return (
     <div className='h-[100vh] w-[100vw] flex '>
-      <Sidebar data={data}/>
+      <Sidebar data={data} />
       <div className='bg-[#FFFFFF] p-5 h-[100vh] w-[75%] overflow-hidden'>
         <h1 className='text-3xl text-[#525256] mt-5'>Dashboard</h1>
         <div className="p-2 flex gap-4">
@@ -52,10 +71,10 @@ function Dashboard({data}) {
           </div>
         </div>
         <div className='w-full h-[40%] shadow-lg mt-8 p-5'>
-           <FinOverView/>
+          <FinOverView />
         </div>
         <div className='w-full h-[35%] shadow-lg mt-6 p-4'>
-          {data && data.recentTransactions && <RecentTransactions data={data || []}/>}
+          {data && data.recentTransactions && <RecentTransactions data={data || []} />}
         </div>
       </div>
     </div>

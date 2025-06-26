@@ -6,10 +6,27 @@ import { FaHandHoldingUsd } from "react-icons/fa";
 import { LuLogOut } from "react-icons/lu";
 import logo from '../assets/logo.svg'
 
-function Sidebar({ data }) {
-
+function Sidebar() {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([])
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    fetch('/api/v1/dashboard', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => res.json())
+      .then((res) => (
+        setData(res)
+      ))
+      .catch((err) => {
+        console.log('Error fetching Error :', err)
+      })
+  }, [])
 
   useEffect(() => {
     const token = localStorage.getItem('token');
